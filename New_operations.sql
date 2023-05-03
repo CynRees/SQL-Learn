@@ -1,0 +1,1 @@
+SELECT SUM(`Grand Total`) from sales_invoice_datasets1;

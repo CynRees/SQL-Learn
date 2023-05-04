@@ -21,3 +21,21 @@ SELECT `Customer`,SUM (`Grand Total`) FROM sales_invoice_datasets1 GROUP BY `Cus
 SELECT `Customer`, SUM(`Grand Total`) AS total_grand
 FROM sales_invoice_datasets1
 GROUP BY `Customer`;
+SELECT `customer`,`Mode of Payment` FROM sales_invoice_datasets1 ORDER BY `Mode of Payment`;
+
+
+
+ SELECT AVG(`Grand Total`) from sales_invoice_datasets1;
+ SELECT *
+ , (case WHEN `Grand Total`>(SELECT AVG(`Grand Total`) FROM sales_invoice_datasets1)
+ then `Grand Total`
+ else null
+ end) as remarks
+ FROM sales_invoice_datasets1 
+
+ SELECT * 
+ FROM customer_data;
+
+ SELECT DISTINCT `Customer` FROM sales_invoice_datasets1;;
+ INSERT INTO books
+ VALUES(100, Sexorcised, 2);

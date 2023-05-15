@@ -99,7 +99,20 @@ WHERE f.id < flights.id
 AND f.carrier=flights.carrier) + 1
  AS flight_sequence_number
 FROM flights;
+SELECT * FROM customer_data;
+SELECT COUNT(*) Customer_name
+FROM customer_data;
+SELECT  DISTINCT `Customer`
+FROM sales_invoice_datasets1;
+;
+SELECT *
+FROM customer_data
+JOIN sales_invoice_datasets1
+ON customer_data.`Customer_Name` = sales_invoice_datasets1.`Customer Name`;
 
-this is testing
-
-yes it was
+--Formatting DATE SQLite
+SELECT column1
+ strftime('%H',column1)
+ FROM tableName
+ GROUP BY 1
+ LIMIT 20;

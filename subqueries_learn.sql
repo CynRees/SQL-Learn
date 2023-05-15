@@ -116,6 +116,10 @@ SELECT column1
  FROM tableName
  GROUP BY 1
  LIMIT 20;
- -- STRINGS String manipulation can be useful to derive information from columns
+ -- Strings:String manipulation can be useful to derive information from columns
  SELECT city || ' ' || state as location
 FROM bakeries;
+ --REPLACE coomand in strings
+ --Any time enriched_flour appears in the ingredients list, we’d like to replace it with just flour.Apply this transformation and be sure to rename the column item_ingredients
+SELECT REPLACE(ingredients,'enriched_','') as item_ingredients
+FROM baked_goods;

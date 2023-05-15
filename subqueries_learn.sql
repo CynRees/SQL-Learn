@@ -116,3 +116,6 @@ SELECT column1
  FROM tableName
  GROUP BY 1
  LIMIT 20;
+ -- STRINGS String manipulation can be useful to derive information from columns
+ SELECT city || ' ' || state as location
+FROM bakeries;

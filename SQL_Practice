@@ -1,3 +1,35 @@
 -- Get the total number of table in a MariaDB database
 SELECT table_schema AS db_name, COUNT(*) as tables FROM information_schema.tables WHERE table_type = 'BASE TABLE' and table_schema
     NOT IN ('information_schema','sys','performance_schema','mysql') GROUP BY table_schema ORDER BY table_schema;
+
+--item sold by Luminere and their selling prices
+SELECT sii.item_code, sii.item_name, sii.qty, sii.rate FROM `tabSales Invoice Item` AS sii 
+INNER JOIN `tabSales Invoice` AS si ON sii.parent = si.name
+WHERE si.status = 'Paid'
+AND si.posting_date >= '2023-01-01'    
+
+--items bought and their purchase prices
+SELECT pii.item_code, pii.item_name, pii.rate, pii.qty FROM `tabPurchase Invoice Item` AS pii INNER JOIN 
+`tabPurchase Invoice` AS pi ON pii.parent = pi.name
+WHERE pi.status IN ('Paid','Unpaid','Overdue')
+AND pi.posting_date >= '2023-01-01'
+
+--Common table expression to get the SP and BP of items
+
+WITH sold_items AS (
+    SELECT sii.item_code, sii.item_name, sii.qty, sii.rate FROM `tabSales Invoice Item` AS sii 
+    INNER JOIN `tabSales Invoice` AS si ON sii.parent = si.name
+    WHERE si.status = 'Paid'
+    AND si.posting_date >= '2023-01-01'
+    ),
+    bought_items AS (
+    SELECT pii.item_code, pii.item_name, pii.rate, pii.qty FROM `tabPurchase Invoice Item` AS pii INNER JOIN 
+    `tabPurchase Invoice` AS pi ON pii.parent = pi.name
+    WHERE pi.status IN ('Paid','Unpaid','Overdue')
+    AND pi.posting_date >= '2023-01-01'
+        )
+
+
+    SELECT sold_items.item_code, sold_items.item_name, sold_items.rate AS SP, 
+    IFNULL(bought_items.rate,0) AS BP FROM sold_items 
+    LEFT JOIN bought_items ON sold_items.item_code = bought_items.item_code 

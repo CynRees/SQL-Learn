@@ -31,5 +31,7 @@ WITH sold_items AS (
 
 
     SELECT sold_items.item_code, sold_items.item_name, sold_items.rate AS SP, 
-    IFNULL(bought_items.rate,0) AS BP FROM sold_items 
+    IFNULL(bought_items.rate,0) AS BP,
+    IFNULL((sold_items.rate - bought_items.rate),0) AS margins 
+    FROM sold_items 
     LEFT JOIN bought_items ON sold_items.item_code = bought_items.item_code 

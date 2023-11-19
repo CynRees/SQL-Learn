@@ -1,0 +1,3 @@
+-- Get the total number of table in a MariaDB database
+SELECT table_schema AS db_name, COUNT(*) as tables FROM information_schema.tables WHERE table_type = 'BASE TABLE' and table_schema
+    NOT IN ('information_schema','sys','performance_schema','mysql') GROUP BY table_schema ORDER BY table_schema;

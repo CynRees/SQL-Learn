@@ -1,5 +1,8 @@
-SELECT SUM(`Grand Total`) from sales_invoice_datasets1;
-
+-- Table variations and set operators
+SELECT A1,A2,...,An
+FROM R1,R2,...,Rn -table variables
+WHERE Condition
+Set operators  - Union, Intersect, Except
 SELECT CONCAT(formal_title, '. ', name_first, SPACE(1), name_last) AS Birder,
 CONCAT(common_name, ' - ', birds.scientific_name) AS Bird,
 time_seen AS 'When Spotted'
